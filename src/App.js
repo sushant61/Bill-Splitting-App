@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Loading from "./Components/loading";
+import Register from "./Components/register";
+import Login from "./Components/login";
+import { useGlobalContext } from "./Context";
+import Payments from "./Components/payments";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { loading, login } = useGlobalContext();
+  if (loading) {
+    return <Loading />;
+  } else if (login) {
+    return <Login />;
+  } else {
+    return (
+      <>
+        <Register />
+        <Payments />
+      </>
+    );
+  }
 }
-
 export default App;
